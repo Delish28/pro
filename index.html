@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Reminder App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Medicine Reminder App</h1>
+        
+        <!-- Form to Add Reminder -->
+        <form action="{{ url_for('add_reminder') }}" method="POST">
+            <label for="medicine_name">Medicine Name:</label>
+            <input type="text" id="medicine_name" name="medicine_name" required>
+
+            <label for="dosage">Dosage:</label>
+            <input type="text" id="dosage" name="dosage" required>
+
+            <label for="reminder_time">Reminder Time (HH:MM 24hr format):</label>
+            <input type="time" id="reminder_time" name="reminder_time" required>
+
+            <label for="health_check">Health Check-up Reminder (Optional):</label>
+            <input type="text" id="health_check" name="health_check">
+
+            <button type="submit">Add Reminder</button>
+        </form>
+
+        <!-- Form to Fetch Medicine Info from 1mg -->
+        <form action="{{ url_for('get_info') }}" method="POST">
+            <label for="medicine_name_info">Get Medicine Info from 1mg:</label>
+            <input type="text" id="medicine_name_info" name="medicine_name" required>
+            <button type="submit">Get Info</button>
+        </form>
+
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
